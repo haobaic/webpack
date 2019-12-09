@@ -1,0 +1,42 @@
+html {
+	height: 100%;
+	background: red;
+	overflow-x: hidden;
+}
+
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+#header,.footer{
+	width:100%;
+	height: .5rem;
+	font-size: .3rem;
+	text-align: center;
+	line-height: .5rem;
+	background: #080808;
+	color: #fff;
+}
+#container {
+	width: 6.5rem;
+	height: 3.5rem;
+	margin: 0 auto;
+	border: solid blue 0.05rem;
+	box-sizing: border-box;
+}
+.BMap_cpyCtrl,.anchorBL {
+	display: none;
+}
+.img{
+	width: 7.5rem;
+	object-fit: cover;
+}
+#span{
+	font-size:1rem;
+}
+#button,input{
+	width: 100%;
+	height: 50px;
+	box-sizing: border-box;
+}
