@@ -1,6 +1,6 @@
 export function LoadBaiduMapScript() {
     console.log("初始化百度地图脚本...");
-    const AK = "kEbRWZ3YpvHlj6Hx8zYleZHGkvvU2kAZ";
+    const AK = "自己的百度ak";
     const BMap_URL = "http://api.map.baidu.com/api?v=2.0&ak="+ AK +"&s=1&callback=onBMapCallback";
     return new Promise((resolve, reject) => {
         // 如果已加载直接返回
