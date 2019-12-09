@@ -1,9 +1,14 @@
 const path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {
+	CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 const config = require("./config/index.js");
-const {setHtml} = require('./config/common.js');
+const {
+	setHtml
+} = require('./config/common.js');
+
 module.exports = {
 	//进入
 	entry: {
@@ -54,7 +59,6 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
-
 					fallback: "style-loader",
 					use: [{
 						loader: 'css-loader',
@@ -64,6 +68,13 @@ module.exports = {
 						}
 					}],
 					publicPath: "../"
+				})
+			},
+			{
+				test: /\.less$/,
+				use: ExtractTextPlugin.extract({ //分离less编译后的css文件
+					fallback: 'style-loader',
+					use: ['css-loader', 'less-loader']
 				})
 			},
 			{
@@ -80,13 +91,14 @@ module.exports = {
 			}
 		]
 	},
+	optimization: config.common,
 	plugins: [
 		//引入插件
 		new Webpack.ProvidePlugin({
 			'$': 'jquery'
 		}),
 		new CleanWebpackPlugin(),
-		new ExtractTextPlugin('./css/[name][hash].min.css')
+		new ExtractTextPlugin('./css/[name][hash].min.css'),
 	]
 };
 const htmlArray = config.htmlArray; //打包的html 

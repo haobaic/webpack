@@ -1,5 +1,6 @@
 import  'jsUti/utils/babel.js';
 import 'cssUti/index.css';
+import 'cssUti/index.less';
 import  {topics} from  'jsUti/utils/url.js';
 import {setProxy} from 'jsUti/utils/common.js';
 import {LoadBaiduMapScript} from './map.js';
