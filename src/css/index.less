@@ -1,3 +1,35 @@
+//普通变量
+@nice-blue: #333;
+@light-blue: @nice-blue + #111;
+//属性变量
+@fontSize: font-size;
+@Rem:0.3rem;
+//选择器变量
+@mySelector: #wrap;
+@Wrap: wrap;
+@{mySelector}{ //变量名 必须使用大括号包裹
+    color: red;
+    width: 50%;
+	@{fontSize}: @Rem;
+}
+.@{Wrap}{
+    color:#ccc;
+	@{fontSize}: @Rem;
+}
+#@{Wrap}{
+   color:#666;
+} 
+//url变量
+ @images: "../images";//需要加引号
+ #images{
+	 width: 100%;
+	 height: 2rem;
+    background: url("@{images}/active.png") no-repeat;//变量名 必须使用大括号包裹
+    background-size:cover ;
+}
+//声明变量
+@background: {background:@light-blue};
+// &符号，表示的是上1级选择器的名字。
 html {
-	background: green;
+	@background();
 }

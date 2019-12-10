@@ -67,14 +67,15 @@ module.exports = {
 							//css压缩
 						}
 					}],
-					publicPath: "../"
+					publicPath: "../" //背景图路径
 				})
 			},
 			{
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({ //分离less编译后的css文件
 					fallback: 'style-loader',
-					use: ['css-loader', 'less-loader']
+					use: ['css-loader', 'less-loader'],
+					publicPath: "../"//背景图路径
 				})
 			},
 			{
@@ -91,6 +92,7 @@ module.exports = {
 			}
 		]
 	},
+	//去除console 公共代码抽离配置
 	optimization: config.common,
 	plugins: [
 		//引入插件

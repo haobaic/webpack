@@ -23,6 +23,7 @@ body {
 	margin: 0 auto;
 	border: solid blue 0.05rem;
 	box-sizing: border-box;
+	
 }
 .BMap_cpyCtrl,.anchorBL {
 	display: none;
