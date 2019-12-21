@@ -1,7 +1,8 @@
 const TerserPlugin = require('terser-webpack-plugin');//去除console
 //域名配置
 var setServer = {
-	port: 8080,
+	port: 8070,//端口号
+	open: true,//是否自动打开页面
 	contentBase: "./dist", //本地服务路径
 	inline: true, //实时刷新
 	hot: true, //热替换

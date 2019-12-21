@@ -1,13 +1,10 @@
 const path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const {
-	CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const config = require("./config/index.js");
-const {
-	setHtml
-} = require('./config/common.js');
+const {setHtml} = require('./config/common.js');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	//进入
@@ -110,3 +107,8 @@ htmlArray.forEach((element) => {
 	var newPlugin = setHtml(element, chunksArray)
 	module.exports.plugins.push(newPlugin);
 });
+//判断是否打开分析页面
+const report=process.env.npm_lifecycle_event==="report";
+if(report){
+	module.exports.plugins.push(new BundleAnalyzerPlugin());
+}
