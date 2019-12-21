@@ -15,6 +15,14 @@
 
     npm run serve  需要在package.json里面把host的数字替换成自己的电脑ip
 
+##项目打包
+  
+    npm run build  打包
+	
+##项目打包查看分析图
+	
+	npm run report  查看分析图
+
 ##目录结构
 
 	config webpack.config.js一些封装配置
