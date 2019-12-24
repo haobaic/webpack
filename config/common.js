@@ -1,5 +1,6 @@
 const config = require("./index.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
 const Htmlminify = {
 	removeAttributeQuotes: true, //去除引号
 	removeComments: true, //去除注释
@@ -26,20 +27,12 @@ const Htmlminify = {
 function setHtml(element, chunksArray) {
 	return new HtmlWebpackPlugin({
 		filename: element + '.html',
-		template: './src/html/' + element + '.html', // 获取最初的html末班
+		template:path.resolve(__dirname, '../src/html/' + element + '.html') , // 获取最初的html末班
+		favicon: path.resolve(__dirname, '../src/images/favicon.ico'),
 		inject: true, //js插入的位置，true/'head'/'body'/false
 		chunks: chunksArray,
 		date: new Date(),
-		minify: Htmlminify,
-		// cdn（自定义属性）加载的资源，不需要手动添加至index.html中,
-		// 顺序按数组索引加载
-		cdn: {
-			css: ['https://cdn.bootcss.com/element-ui/2.8.2/theme-chalk/index.css'],
-			js: [
-				'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
-				'https://cdn.bootcss.com/element-ui/2.8.2/index.js'
-			]
-		}
+		minify: Htmlminify
 	});
 }
 exports.setHtml = setHtml;
