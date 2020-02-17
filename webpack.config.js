@@ -2,10 +2,11 @@ const path = require('path');
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const config = require("./config/index.js");
-const {setHtml} = require('./config/common.js');
+const {setHtml} = require('./config/webpack.html.js');
+const setServer = require('./config/webpack.server.js');
+const setConf = require('./config/webpack.conf.js');
+const setModule = require('./config/webpack.module.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 module.exports = {
 	//进入
 	entry: {
@@ -28,69 +29,16 @@ module.exports = {
 		}
 	},
 	//域名配置
-	devServer: config.setServer,
+	devServer: setServer.devServer,
 	watch: true, // 开启监听文件更改，自动刷新
 	watchOptions: {
 		ignored: /node_modules/, //忽略不用监听变更的目录
 		aggregateTimeout: 500, //防止重复保存频繁重新编译,500毫米内重复保存不打包
 		poll: 1000 //每秒询问的文件变更的次数
 	},
-	module: {
-		rules: [{
-				test: /(\.jsx|\.js)$/,
-				use: {
-					loader: "babel-loader",
-					options: { //如果有这个设置则不用再添加.babelrc文件进行配置
-						"babelrc": false, // 不采用.babelrc的配置
-						"plugins": [
-							"dynamic-import-webpack",
-							"babel-plugin-transform-runtime" //async await兼容配置
-						],
-						presets: [
-							"env", "react"
-						]
-					}
-				},
-				exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: [{
-						loader: 'css-loader',
-						options: {
-							minimize: true
-							//css压缩
-						}
-					}],
-					publicPath: "../" //背景图路径
-				})
-			},
-			{
-				test: /\.less$/,
-				use: ExtractTextPlugin.extract({ //分离less编译后的css文件
-					fallback: 'style-loader',
-					use: ['css-loader', 'less-loader'],
-					publicPath: "../"//背景图路径
-				})
-			},
-			{
-				test: /\.(jpg|png|jpeg|gif)$/,
-				use: 'file-loader?limit=1024&name=./images/[name][hash].[ext]'
-			},
-			{
-				test: /\.(htm|html)$/i,
-				use: 'html-withimg-loader'
-			},
-			{
-				test: /\.(woff|ttf|svg|eot|xttf|woff2)$/,
-				use: 'file-loader?limit=1024&name=./fonts/[name].[ext]'
-			}
-		]
-	},
+	module:setModule.module,
 	//去除console 公共代码抽离配置
-	optimization: config.common,
+	optimization: setConf.optimization,
 	plugins: [
 		//引入插件
 		new Webpack.ProvidePlugin({
@@ -100,7 +48,7 @@ module.exports = {
 		new ExtractTextPlugin('./css/[name][hash].min.css'),
 	]
 };
-const htmlArray = config.htmlArray; //打包的html 
+const htmlArray =['index', 'submit'] ; //打包的html 
 //html循环打包
 htmlArray.forEach((element) => {
 	const chunksArray = [element];

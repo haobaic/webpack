@@ -1,4 +1,3 @@
-const config = require("./index.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
 const Htmlminify = {
